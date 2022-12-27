@@ -1,7 +1,13 @@
 package com.curso.ecommerce.model;
 
+import javax.persistence.*;
+import java.util.List;
 
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String username;
@@ -10,6 +16,12 @@ public class User {
     private String phone;
     private String type;
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<Product> products;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 
     public User() {
     }
@@ -87,6 +99,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override

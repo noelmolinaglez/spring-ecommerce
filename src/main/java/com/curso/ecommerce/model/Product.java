@@ -1,6 +1,12 @@
 package com.curso.ecommerce.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "products")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String description;
@@ -8,16 +14,28 @@ public class Product {
     private double price;
     private int amount;
 
+    @ManyToOne
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Product() {
     }
 
-    public Product(long id, String name, String description, String image, float price, int amount) {
+    public Product(long id, String name, String description, String image, float price, int amount, User user) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.image = image;
         this.price = price;
         this.amount = amount;
+        this.user = user;
     }
 
     public long getId() {

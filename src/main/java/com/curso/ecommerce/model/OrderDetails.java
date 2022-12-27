@@ -1,11 +1,24 @@
 package com.curso.ecommerce.model;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "ordersDetails")
 public class OrderDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private int amount;
     private double price;
     private double total;
+
+    @OneToOne
+    private Order order;
+
+    @OneToMany
+    private List<Product> products;
 
     public OrderDetails() {
     }
@@ -56,6 +69,14 @@ public class OrderDetails {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     @Override
