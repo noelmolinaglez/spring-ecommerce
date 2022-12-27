@@ -17,8 +17,8 @@ public class OrderDetails {
     @OneToOne
     private Order order;
 
-    @OneToMany
-    private List<Product> products;
+    @ManyToOne
+    private Product products;
 
     public OrderDetails() {
     }
